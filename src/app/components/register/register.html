@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-dark">
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 28rem;">
+    <h3 class="text-center fw-bold text-warning mb-4">Register</h3>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <!-- Full Name -->
+      <div class="mb-3">
+        <label class="form-label text-dark">Full Name</label>
+        <input type="text" formControlName="fullname" class="form-control rounded-pill" [ngClass]="{ 
+            'is-invalid': (submitted || registerForm.get('fullname')?.touched) && registerForm.get('fullname')?.errors,
+            'is-valid': registerForm.get('fullname')?.touched && !registerForm.get('fullname')?.errors 
+          }">
+
+        @if ((submitted || registerForm.get('fullname')?.touched) && registerForm.get('fullname')?.errors) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('fullname')?.errors?.['required']) {
+          <div>Full name is required</div>
+          }
+          @if (registerForm.get('fullname')?.errors?.['minlength']) {
+          <div>Full name must be at least 5 characters</div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label class="form-label text-dark">Username</label>
+        <input type="text" formControlName="username" class="form-control rounded-pill" [ngClass]="{ 
+            'is-invalid': (submitted || registerForm.get('username')?.touched) && registerForm.get('username')?.errors,
+            'is-valid': registerForm.get('username')?.touched && !registerForm.get('username')?.errors 
+          }">
+
+        @if ((submitted || registerForm.get('username')?.touched) && registerForm.get('username')?.errors) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('username')?.errors?.['required']) {
+          <div>Username is required</div>
+          }
+          @if (registerForm.get('username')?.errors?.['minlength']) {
+          <div>Username must be at least 3 characters</div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="form-label text-dark">Email</label>
+        <input type="email" formControlName="email" class="form-control rounded-pill" [ngClass]="{ 
+            'is-invalid': (submitted || registerForm.get('email')?.touched) && registerForm.get('email')?.errors,
+            'is-valid': registerForm.get('email')?.touched && !registerForm.get('email')?.errors 
+          }">
+
+        @if ((submitted || registerForm.get('email')?.touched) && registerForm.get('email')?.errors) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('email')?.errors?.['required']) {
+          <div>Email is required</div>
+          }
+          @if (registerForm.get('email')?.errors?.['email']) {
+          <div>Enter a valid email address</div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="form-label text-dark">Password</label>
+        <input type="password" formControlName="password" class="form-control rounded-pill" [ngClass]="{ 
+            'is-invalid': (submitted || registerForm.get('password')?.touched) && registerForm.get('password')?.errors,
+            'is-valid': registerForm.get('password')?.touched && !registerForm.get('password')?.errors 
+          }">
+
+        @if ((submitted || registerForm.get('password')?.touched) && registerForm.get('password')?.errors) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('password')?.errors?.['required']) {
+          <div>Password is required</div>
+          }
+          @if (registerForm.get('password')?.errors?.['minlength']) {
+          <div>Password must be at least 6 characters</div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label class="form-label text-dark">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" class="form-control rounded-pill" [ngClass]="{ 
+            'is-invalid': (submitted || registerForm.get('confirmPassword')?.touched) && (registerForm.get('confirmPassword')?.errors || registerForm.errors?.['mismatch']),
+            'is-valid': registerForm.get('confirmPassword')?.touched && !registerForm.get('confirmPassword')?.errors && !registerForm.errors?.['mismatch']
+          }">
+
+        @if ((submitted || registerForm.get('confirmPassword')?.touched) && (registerForm.get('confirmPassword')?.errors
+        || registerForm.errors?.['mismatch'])) {
+        <div class="invalid-feedback">
+          @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+          <div>Confirm Password is required</div>
+          }
+          @if (registerForm.errors?.['mismatch']) {
+          <div>Passwords do not match</div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-warning text-dark fw-bold w-100 rounded-pill">
+        Register
+      </button>
+    </form>
+  </div>
+</div>

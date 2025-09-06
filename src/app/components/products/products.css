@@ -1,0 +1,12 @@
+h2 {
+  font-size: 2rem;
+  color: #111827;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+.row {
+  margin: 0;
+}

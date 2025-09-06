@@ -1,0 +1,87 @@
+<div class="container my-5">
+  <!-- Loading -->
+  @if (loading) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-warning" role="status"></div>
+  </div>
+  }
+
+  <!-- Error -->
+  @if (error) {
+  <div class="alert alert-danger text-center">{{ error }}</div>
+  }
+
+  <!-- prd -->
+  @if (prd) {
+  <div class="row gx-5">
+    <!-- Left: images -->
+    <div class="col-12 col-md-6">
+      <div class="prd-images">
+        <div class="main-image mb-3">
+          <img [src]="prd.images[0]" [alt]="prd.title" class="img-fluid rounded" />
+        </div>
+        <!-- <div class="thumbs d-flex gap-2">
+          @for (img of prd.images; track $index) {
+          <button class="thumb-btn" type="button" (click)="prd.images[0] = img">
+            <img src="{{ img }}" alt="thumb{{$index}}" class="img-thumbnail" />
+          </button>
+          }
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Right: details -->
+    <div class="col-12 col-md-6">
+      <h2 class="fw-bold mb-2">{{ prd.title }}</h2>
+      <p class="text-muted mb-2">{{ prd.brand }} • {{ prd.category }}</p>
+
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <div class="price-display">
+          <div class="fs-4 fw-bold text-dark">
+            {{ prd.price | currency:'USD':'symbol' }}
+          </div>
+          <div class="text-muted text-decoration-line-through">
+            {{ (prd.price / (1 - prd.discountPercentage/100)) | currency:'USD':'symbol' }}
+          </div>
+        </div>
+
+        <div class="rating d-flex align-items-center">
+          @for (i of [1,2,3,4,5]; track $index) {
+          <i class="bi" [ngClass]="{
+              'bi-star-fill text-warning': $index < Math.floor(prd.rating),
+              'bi-star-half text-warning': $index === Math.floor(prd.rating) && prd.rating % 1 !== 0,
+              'bi-star text-muted': $index >= prd.rating
+            }"></i>
+          }
+          <span class="ms-2 text-muted">({{ prd.rating }})</span>
+        </div>
+      </div>
+
+      <p class="text-secondary mb-3">{{ prd.description }}</p>
+
+      <ul class="list-unstyled small mb-3">
+        <li><strong>Stock:</strong> {{ prd.stock }}</li>
+        <li><strong>SKU:</strong> {{ prd.sku }}</li>
+        <li><strong>Weight:</strong> {{ prd.weight }} g</li>
+        <li><strong>Dimensions:</strong> {{ prd.dimensions.width }} × {{ prd.dimensions.height }} × {{
+          prd.dimensions.depth }} mm</li>
+        <li><strong>Warranty:</strong> {{ prd.warrantyInformation }}</li>
+      </ul>
+
+      <div class="d-flex gap-2 mb-4">
+        <button class="btn btn-dark btn-lg">Add to Cart</button>
+        <button class="btn btn-outline-dark btn-lg">Buy Now</button>
+      </div>
+
+      <div class="meta small text-muted">
+        <div><strong>Availability:</strong> {{ prd.availabilityStatus }}</div>
+        <div><strong>Return Policy:</strong> {{ prd.returnPolicy }}</div>
+      </div>
+
+      <div class="mt-4">
+        <a routerLink="/products" class="btn btn-link">← Back to prds</a>
+      </div>
+    </div>
+  </div>
+  }
+</div>

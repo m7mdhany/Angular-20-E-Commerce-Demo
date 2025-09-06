@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-dark">
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 22rem;">
+    <h3 class="text-center fw-bold text-warning mb-4">Login</h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label text-dark">Username</label>
+        <input type="text" id="username" formControlName="username" class="form-control rounded-pill" [ngClass]="{ 
+            'is-invalid': (submitted || loginForm.get('username')?.touched || loginForm.get('username')?.dirty) 
+              && loginForm.get('username')?.errors,
+            'is-valid': (loginForm.get('username')?.touched || loginForm.get('username')?.dirty) 
+              && !loginForm.get('username')?.errors
+          }">
+
+        @if ((submitted || loginForm.get('username')?.touched || loginForm.get('username')?.dirty)
+        && loginForm.get('username')?.errors) {
+        <div class="invalid-feedback">
+          @if (loginForm.get('username')?.errors?.['required']) {
+          <div>Username is required</div>
+          }
+          @if (loginForm.get('username')?.errors?.['minlength']) {
+          <div>Username must be at least 3 characters</div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label text-dark">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control rounded-pill" [ngClass]="{ 
+            'is-invalid': (submitted || loginForm.get('password')?.touched || loginForm.get('password')?.dirty) 
+              && loginForm.get('password')?.errors,
+            'is-valid': (loginForm.get('password')?.touched || loginForm.get('password')?.dirty) 
+              && !loginForm.get('password')?.errors
+          }">
+
+        @if ((submitted || loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+        && loginForm.get('password')?.errors) {
+        <div class="invalid-feedback">
+          @if (loginForm.get('password')?.errors?.['required']) {
+          <div>Password is required</div>
+          }
+          @if (loginForm.get('password')?.errors?.['minlength']) {
+          <div>Password must be at least 6 characters</div>
+          }
+        </div>
+        }
+      </div>
+
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-warning text-dark fw-bold w-100 rounded-pill">
+        Login
+      </button>
+    </form>
+  </div>
+</div>

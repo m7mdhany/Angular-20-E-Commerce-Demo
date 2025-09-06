@@ -1,0 +1,49 @@
+<div class="card product-card my-3">
+  <!-- Product Image -->
+  <div class="product-media position-relative">
+    <img [src]="product.thumbnail" [alt]="product.title" class="img-fluid" />
+    <span class="ribbon">-{{ product.discountPercentage }}%</span>
+
+    <button class="wishlist-btn" type="button">
+      <i class="bi bi-heart"></i>
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="card-body">
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <span class="chip">{{ product.brand }}</span>
+      <div class="rating">
+        <i *ngFor="let star of [1,2,3,4,5]; let i = index" class="bi" [ngClass]="{
+             'bi-star-fill text-warning': i < Math.floor(product.rating),
+             'bi-star-half text-warning': i === Math.floor(product.rating) && product.rating % 1 !== 0,
+             'bi-star text-muted': i >= product.rating
+           }"></i>
+        <small class="text-muted ms-1">({{ product.stock }})</small>
+      </div>
+    </div>
+
+    <h5 class="card-title mb-1">{{ product.title }}</h5>
+    <p class="text-secondary small mb-3">{{ product.description }}</p>
+
+    <!-- Price -->
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="price">
+        <span class="new">${{ product.price }}</span>
+        <span class="old text-muted text-decoration-line-through">
+          ${{ (product.price / (1 - product.discountPercentage/100)).toFixed(2) }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-grid gap-2">
+      <button class="btn btn-dark btn-add">
+        <i class="bi bi-bag-plus me-2"></i> Add to Cart
+      </button>
+      <button class="btn btn-outline-dark btn-add" [routerLink]="['/products', product.id]">
+        <i class="bi bi-lightning-charge me-2"></i>Show Details
+      </button>
+    </div>
+  </div>
+</div>
