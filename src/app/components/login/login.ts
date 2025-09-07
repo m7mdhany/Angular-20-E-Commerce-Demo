@@ -17,8 +17,8 @@ export class Login {
   constructor(private authService: Auth,
     private router: Router,) {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      username: new FormControl('emilys', [Validators.required, Validators.minLength(3)]),
+      password: new FormControl('emilyspass', [Validators.required, Validators.minLength(6)])
     });
   }
 

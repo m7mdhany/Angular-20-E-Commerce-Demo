@@ -23,10 +23,10 @@
 
       <!-- Right Side -->
       <div class="d-flex gap-5">
-        <button class="btn btn-dark position-relative" routerLink="products">
+        <button class="btn btn-dark position-relative bg-gradient" routerLink="cart">
           <i class="bi bi-cart3 fs-5"></i>
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            0
+            {{ cartCount }}
           </span>
         </button>
         @if (authService.isLoggedIn()) {
@@ -35,8 +35,10 @@
           (click)="authService.logout()">Logout</a>
 
         } @else {
-        <a class="btn btn-outline-warning rounded-pill px-3" routerLink="login">Login</a>
-        <a class="btn btn-warning text-dark rounded-pill px-3 fw-bold" routerLink="register">Sign Up</a>
+        <div class="d-flex gap-2">
+          <a class="btn btn-outline-warning rounded-pill px-3" routerLink="login">Login</a>
+          <a class="btn btn-warning text-dark rounded-pill px-3 fw-bold" routerLink="register">Sign Up</a>
+        </div>
         }
       </div>
     </div>

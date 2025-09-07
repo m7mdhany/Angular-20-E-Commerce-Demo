@@ -38,7 +38,7 @@
 
     <!-- Buttons -->
     <div class="d-grid gap-2">
-      <button class="btn btn-dark btn-add">
+      <button class="btn btn-dark btn-add" (click)="addToCart()">
         <i class="bi bi-bag-plus me-2"></i> Add to Cart
       </button>
       <button class="btn btn-outline-dark btn-add" [routerLink]="['/products', product.id]">
