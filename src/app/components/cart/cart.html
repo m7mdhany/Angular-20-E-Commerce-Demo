@@ -1,0 +1,45 @@
+<div class="container my-5 cart">
+  <h2 class="fw-bold mb-4 text-center">🛒 Your Cart</h2>
+
+  @if (items.length === 0) {
+  <div class="alert alert-info text-center">
+    Your cart is empty!
+  </div>
+  } @else {
+  <table class="table table-bordered align-middle">
+    <thead class="table-warning">
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items; track item.product.id) {
+      <tr>
+        <td>{{ item.product.title }}</td>
+        <td>${{ item.product.price }}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-secondary me-2" (click)="decreaseQuantity(item.product.id)">-</button>
+          {{ item.quantity }}
+          <button class="btn btn-sm btn-outline-secondary ms-2" (click)="increaseQuantity(item.product.id)">+</button>
+        </td>
+        <td>${{ (item.product.price * item.quantity).toFixed(2) }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="removeItem(item.product.id)">Remove</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <button class="btn btn-outline-danger" (click)="clearCart()">Clear Cart</button>
+    <h4 class="fw-bold">Total: ${{ totalPrice }}</h4>
+  </div>
+  <button class="btn btn-outline-dark w-100 mt-5" (click)="clearCart()">Place Order</button>
+
+  }
+</div>

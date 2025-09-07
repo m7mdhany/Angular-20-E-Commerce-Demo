@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Iproducts } from '../models/iproducts';
-
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +8,7 @@ export class Cart {
   private cartKey = 'cartItems';
   private cart: { product: Iproducts, quantity: number }[] = [];
 
-  constructor() {
+  constructor(private toastr: ToastrService) {
     this.loadCart();
   }
 
@@ -31,8 +31,12 @@ export class Cart {
     const existingItem = this.cart.find(item => item.product.id === product.id);
     if (existingItem) {
       existingItem.quantity++;
+      this.toastr.success(`${product.title} quantity increased`, 'Success');
+
     } else {
       this.cart.push({ product, quantity: 1 });
+      this.toastr.success(`${product.title} added to cart`, 'Success');
+
     }
     this.saveCart();
   }

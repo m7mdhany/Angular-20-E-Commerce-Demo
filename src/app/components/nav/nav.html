@@ -23,13 +23,14 @@
 
       <!-- Right Side -->
       <div class="d-flex gap-5">
+        @if (authService.isLoggedIn()) {
         <button class="btn btn-dark position-relative bg-gradient" routerLink="cart">
           <i class="bi bi-cart3 fs-5"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            [hidden]="cartCount == 0">
             {{ cartCount }}
           </span>
         </button>
-        @if (authService.isLoggedIn()) {
 
         <a class="btn btn-warning text-dark rounded-pill px-3 fw-bold" routerLink="/home"
           (click)="authService.logout()">Logout</a>
