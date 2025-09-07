@@ -57,6 +57,14 @@ export class Cart {
   clearCart() {
     this.cart = [];
     this.saveCart();
+    this.toastr.success(`Cart Cleared`, 'Success');
+
+  }
+  placeOrder() {
+    this.cart = [];
+    this.saveCart();
+    this.toastr.success(`Order Placed`, 'Success');
+
   }
 
   getTotalPrice() {

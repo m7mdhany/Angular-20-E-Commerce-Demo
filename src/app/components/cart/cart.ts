@@ -43,4 +43,7 @@ export class Cart {
   clearCart() {
     this.cart.clearCart();
   }
+  placeOrder() {
+    this.cart.placeOrder();
+  }
 }
