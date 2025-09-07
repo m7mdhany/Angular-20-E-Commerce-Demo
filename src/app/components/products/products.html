@@ -1,17 +1,17 @@
 <div class="container my-5">
-  @if (loading) {
-  <div class="text-center py-5">
-    <div class="spinner-border text-warning" role="status"></div>
-  </div>
-  }
 
   <!-- Error -->
   @if (error) {
   <div class="alert alert-danger text-center">{{ error }}</div>
   }
-  @if(products){
+
+  @if (products.length > 0) {
   <h2 class="text-center mb-4 fw-bold">Our Products</h2>
-  <p class="text-light-emphasis">Result: {{ filteredProducts.length }}</p>
+  <p class="text-light-emphasis">
+    Result: {{ filteredProducts.length }}
+  </p>
+
+  <!-- Filters -->
   <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <!-- Search -->
@@ -28,6 +28,14 @@
     </div>
   </div>
 
+  <!-- Loading -->
+  @if (loading) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-warning" role="status"></div>
+  </div>
+  }
+
+  <!-- Products Grid -->
   <div class="row g-4">
     @for (prd of paginatedProducts; track $index) {
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -36,12 +44,14 @@
     }
   </div>
 
-  <div class="d-flex justify-content-center mt-4" *if="totalPages > 1">
+  <!-- Pagination -->
+  @if (totalPages > 1) {
+  <div class="pagi d-flex justify-content-center mt-4">
     <button class="btn btn-outline-secondary me-2" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
-      Previous
+      <i class="bi bi-chevron-left me-1"></i>
     </button>
 
-    <div class="d-flex justify-content-center my-4">
+    <div class="d-flex justify-content-center">
       @for (i of pagesArray; track $index) {
       <button class="btn me-1" [class.btn-warning]="currentPage === i" [class.btn-outline-secondary]="currentPage !== i"
         (click)="changePage(i)">
@@ -52,10 +62,9 @@
 
     <button class="btn btn-outline-secondary ms-2" (click)="changePage(currentPage + 1)"
       [disabled]="currentPage === totalPages">
-      Next
+      <i class="bi bi-chevron-right ms-1"></i>
     </button>
   </div>
-
-
+  }
   }
 </div>
