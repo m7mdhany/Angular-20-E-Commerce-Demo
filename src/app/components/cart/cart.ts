@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Cart as CartService } from '../../services/cart';
-import { Iproducts } from '../../models/iproducts';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-cart',
   standalone: true,
